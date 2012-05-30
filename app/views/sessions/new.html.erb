@@ -1,0 +1,21 @@
+<div>
+  <h1>Logga in!</h1>
+<!--    <%= simple_form_for :user, :url => sessions_path do |f| %>
+    <%= f.input :email, :label => 'E-postadress', :input_html => { :value => params.fetch(:user, {})[:email] } %>
+    <!-- fetch hämtar parametrar med det första värdet i första hand och det andra i andra hand. Därefter körs 'email' på det. Om user inte finns körs email på en tom array istället, och då blir det nil och tom sträng --
+    <%= f.input :password, :label => 'Lösenord' %>
+    <%= f.submit 'Logga in' %>
+  <% end %> -->
+
+<%= form_tag sessions_path do %>
+    <p>
+      <%= label_tag :email %> <br />
+      <%= text_field_tag :email, params[:email] %>
+    </p>
+    <p>
+      <%= label_tag :password %> <br />
+      <%= password_field_tag :password %>
+    </p>
+    <p class="button"><%= submit_tag 'Logga in' %></p>
+  <% end %> -->
+</div>

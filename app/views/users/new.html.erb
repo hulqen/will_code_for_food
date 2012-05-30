@@ -1,0 +1,8 @@
+<h1>Skapa ny användare</h1>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :email, :label => "E-postadress" %>
+  <%= f.input :password, :label => "Lösenord" %>
+  <%= f.input :password_confirmation, :label => "Lösenordet igen" %>
+  <%= f.submit 'Skapa användare' %>
+<% end %>
