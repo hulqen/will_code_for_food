@@ -10,8 +10,8 @@
 
 <div id="user_nav">
   <% if current_user %>
-    Inloggad som <%= current_user.email %>!
-    <%= link_to "Logga ut", log_out_path, :id => "log_out" %>
+    Inloggad som <%= current_user.email %>
+    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %>
   <% else %>
     <%= link_to "Registrera dig", sign_up_path %> eller
     <%= link_to "logga in", log_in_path %>
