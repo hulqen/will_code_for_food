@@ -5,6 +5,6 @@ Feature: User login
   I want to be able to login
 
   Scenario: Logging in
-    Given the user "mat@plan.se" has an account
-    When the user logs in
-    Then the user should see "Inloggad! Välkommen mat@plan.se"
+    Given I, "mat@plan.se", have an account
+    When I log in
+    Then I should get the message "Inloggad! Välkommen mat@plan.se"
