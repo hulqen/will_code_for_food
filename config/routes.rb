@@ -10,8 +10,6 @@ Matplanera::Application.routes.draw do
 
   # match 'products/:id' => 'catalog#view'
 
-
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

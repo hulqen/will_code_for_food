@@ -9,13 +9,13 @@
 
 <%= form_tag sessions_path do %>
     <p>
-      <%= label_tag :email %> <br />
-      <%= text_field_tag :email, params[:email] %>
+      <%= label_tag 'E-postadress' %> <br />
+      <%= text_field_tag :email, params[:email], :class => "email"  %>
     </p>
     <p>
-      <%= label_tag :password %> <br />
-      <%= password_field_tag :password %>
+      <%= label_tag 'Lösenord' %> <br />
+      <%= password_field_tag :password, :class => "password"  %>
     </p>
-    <p class="button"><%= submit_tag 'Logga in' %></p>
+    <p class="button"><%= submit_tag 'Logga in', :class => "login", :id => "login" %></p>
   <% end %> -->
 </div>
