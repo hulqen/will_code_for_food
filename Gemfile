@@ -6,6 +6,7 @@ gem 'sqlite3'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'json'
+gem 'launchy'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -6,5 +6,5 @@ Feature: User login
 
   Scenario: Logging in
     Given the user "mat@plan.se" has an account
-    When he logs in
-    Then he should see "Inloggad! Välkommen mat@plan.se"
+    When the user logs in
+    Then the user should see "Inloggad! Välkommen mat@plan.se"
