@@ -1,0 +1,8 @@
+<h1>Skapa nytt recept</h1>
+
+<%= simple_form_for @recipe do |f| %>
+  <%= f.input :name, :label => "Namn" %>
+  <%= f.input :cook_time, :label => "Tillagningstid" %>
+  <%= f.input :servings, :collection => 1..24, :label => "Portioner" %>
+  <%= f.submit 'Spara recept' %>
+<% end %>

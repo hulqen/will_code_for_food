@@ -1,0 +1,8 @@
+<% r = @recipe %>
+<h1><%= r.name %></h1>
+<h2>Tillagningstid: <%= r.cook_time %></h2>
+
+<%= simple_form_for @recipe do |f| %>
+  <%= f.input :servings, :label => 'Portioner', :collection => 1..24 %>
+  <%= f.submit :value => 'Uppdatera'%>
+<% end %>
