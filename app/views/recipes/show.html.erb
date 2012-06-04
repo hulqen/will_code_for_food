@@ -6,3 +6,10 @@
   <%= f.input :servings, :label => 'Portioner', :collection => 1..24 %>
   <%= f.submit :value => 'Uppdatera'%>
 <% end %>
+<h2>Gör så här:</h2>
+<ol class="recipe_instructions">
+  <% r.instructions.each do |i| %>
+    <li><%= i.text %> </li>
+  <% end %>
+</ol>
+
