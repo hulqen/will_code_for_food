@@ -11,13 +11,14 @@
 <div id="user_nav">
   <% if current_user %>
     Inloggad som <%= current_user.email %>
-    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %>
+    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %> |
+    <%= link_to "Skapa nytt recept", new_recipe_path %>
   <% else %>
     <%= link_to "Registrera dig", sign_up_path %> eller
     <%= link_to "logga in", log_in_path %>
-  <% end %>
+  <% end %> |
+  <%= link_to "Receptlistan", recipes_path %>
 </div>
-
 
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>

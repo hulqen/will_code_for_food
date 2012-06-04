@@ -17,8 +17,13 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to root_url, :notice => "Receptet \"" + @recipe.name + "\" sparat!"
     else
-      flash.now.alert = "Du glömde fylla i något!"
+      flash.now.alert = "Du glömde fylla i något! Se nedan:"
       render "new"
     end
+  end
+
+  def update
+    @recipe = Recipe.update(params[:recipe])
+    @recipe.save
   end
 end

@@ -10,4 +10,3 @@ Feature: Save a recipe
     And I create a recipe called "Laxpytt" with servings "5" and cook time "20 minuter"
     When I am on the "recipes" page
     Then I should see the recipe "Laxpytt"
-    And show me the page
