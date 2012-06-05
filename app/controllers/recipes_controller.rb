@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    3.times { @recipe.instructions.build }
   end
 
   def create
@@ -25,5 +26,10 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.update(params[:recipe])
     @recipe.save
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
   end
 end

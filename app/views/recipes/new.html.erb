@@ -4,5 +4,11 @@
   <%= f.input :name, :label => "Namn" %>
   <%= f.input :cook_time, :label => "Tillagningstid" %>
   <%= f.input :servings, :collection => 1..24, :label => "Portioner" %>
+  <h2>Instruktioner: </h2>
+  <ol>
+    <%= f.simple_fields_for :instructions do |i| %>
+        <li><%= i.input :text, :label => false %></li>
+    <% end %>
+  </ol>
   <%= f.submit 'Spara recept' %>
 <% end %>
