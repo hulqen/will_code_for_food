@@ -11,6 +11,5 @@ Feature: View details of a single recipe
     And I am on the "recipes" page
     When I view "Korv stroganoff"
     Then I should see servings "5" and cook time "20 minuter"
-    And show me the page
     And I should see instructions "Koka riset"
     And I should see instructions "Skär korven i stavar"
