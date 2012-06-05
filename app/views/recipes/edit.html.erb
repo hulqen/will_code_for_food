@@ -1,0 +1,26 @@
+<h1>Redigera receptet</h1>
+
+<%= nested_form_for @recipe do |f| %>
+  <%= f.label :name, "Namn" %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label :cook_time, "Tillagningstid" %>
+  <%= f.text_field :cook_time %><br />
+
+  <%= f.label :servings, "Portioner" %>
+  <%= f.select(:servings, 1..24) %><br />
+  <h2>Ingredienser:</h2>
+
+  <h2>Instruktioner: </h2>
+  <ol>
+    <%= f.fields_for :instructions do |i| %>
+        <li>
+          <%= i.text_field :text %>
+          <%= i.link_to_remove "Ta bort rad" %>
+        </li>
+    <% end %>
+    <%= f.link_to_add "Lägg till rad", :instructions %>
+  </ol>
+  <%= f.submit 'Spara recept' %>
+<% end %>
+<%= button_to 'Ta bort recept', recipe_path(@recipe), :method => :delete, :confirm => 'Är du säker?' %>

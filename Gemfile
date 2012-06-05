@@ -8,6 +8,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'json'
 gem 'launchy'
 gem 'acts_as_list'
+gem 'nested_form'
 
 # Gems used only for assets and not required
 # in production environments by default.

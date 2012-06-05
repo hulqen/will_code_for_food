@@ -1,14 +1,49 @@
+<!-- receptformulär med simple_form
 <h1>Skapa nytt recept</h1>
 
 <%= simple_form_for @recipe do |f| %>
   <%= f.input :name, :label => "Namn" %>
   <%= f.input :cook_time, :label => "Tillagningstid" %>
   <%= f.input :servings, :collection => 1..24, :label => "Portioner" %>
+  <h2>Ingredienser:</h2>
+
   <h2>Instruktioner: </h2>
   <ol>
     <%= f.simple_fields_for :instructions do |i| %>
-        <li><%= i.input :text, :label => false %></li>
+      <li class="fields">
+        <%= i.input :text, :label => false %>
+        <%= remove_fields "ta bort", i %>
+      </li>
+    <%= add_fields "Lägg till rad", i, :instructions %>
     <% end %>
+  </ol>
+  <%= f.submit 'Spara recept' %>
+<% end %>
+-->
+
+<!-- receptformulär med vanliga form helpers och nested form-->
+<h1>Skapa nytt recept</h1>
+
+<%= nested_form_for @recipe do |f| %>
+  <%= f.label :name, "Namn" %>
+  <%= f.text_field :name %><br />
+
+  <%= f.label :cook_time, "Tillagningstid" %>
+  <%= f.text_field :cook_time %><br />
+
+  <%= f.label :servings, "Portioner" %>
+  <%= f.select(:servings, 1..24) %><br />
+  <h2>Ingredienser:</h2>
+
+  <h2>Instruktioner: </h2>
+  <ol>
+    <%= f.fields_for :instructions do |i| %>
+        <li>
+          <%= i.text_field :text %>
+          <%= i.link_to_remove "Ta bort rad" %>
+        </li>
+    <% end %>
+    <%= f.link_to_add "Lägg till rad", :instructions %>
   </ol>
   <%= f.submit 'Spara recept' %>
 <% end %>

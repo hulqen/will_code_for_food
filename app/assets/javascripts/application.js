@@ -13,3 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery_nested_form
+
+// manuell jq-metod för att ta bort och lägga till fält. nested_forms ersätter detta
+function remove_fields(link) {
+  $(link).parent().find(':hidden').val(1);
+  $(link).parent(".fields").hide();
+  console.log("hej");
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  $(link).parent().insert({
+    before: content.replace(regexp, new_id)
+  });
+}
