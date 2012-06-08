@@ -10,7 +10,17 @@
   <%= f.label :servings, "Portioner" %>
   <%= f.select(:servings, 1..24) %><br />
   <h2>Ingredienser:</h2>
-
+  <ol>
+    <%= f.fields_for :ingredients do |i| %>
+      <li>
+        <%= i.text_field :amount %>
+        <%= i.collection_select(:unit_id, Unit.all, :id, :name, :include_blank => true) %>
+        <%= i.text_field :product_name %>
+        <%= i.link_to_remove "Ta bort rad" %>
+      </li>
+    <% end %>
+    <%= f.link_to_add "Lägg till rad", :ingredients %>
+  </ol>
   <h2>Instruktioner: </h2>
   <ol>
     <%= f.fields_for :instructions do |i| %>

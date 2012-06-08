@@ -1,5 +1,15 @@
-Given /^there is a recipe called "(.*?)" with servings "(.*?)" and cook time "(.*?)"$/ do |name, servings, cook_time|
+Given /^there is a recipe called "(.*?)" that has servings "(.*?)" and cook time "(.*?)" and the following ingredients:$/ do |name, servings, cook_time, table|
   @recipe = Recipe.create!(:name => name, :servings => servings, :cook_time => cook_time)
+  table.hashes.each do |row|
+    params = {:amount => row[:amount], :unit_name => row[:unit], :product_name => row[:product]}
+    @recipe.ingredients.create!(params)
+  end
+end
+
+Given /^the instructions:$/ do |row|
+  row.hashes.each do |t|
+    @recipe.instructions.create!(t)
+  end
 end
 
 Given /^the recipe has the instruction "(.*?)"$/ do |instruction_text|
@@ -17,6 +27,12 @@ end
 Then /^I should see servings "(.*?)" and cook time "(.*?)"$/ do |servings, cook_time|
   page.should have_content(servings)
   page.should have_content(cook_time)
+end
+
+Then /^I should see the ingredient "(.*?)" "(.*?)" "(.*?)"$/ do |amount, unit, product|
+  page.should have_content(amount)
+  page.should have_content(unit)
+  page.should have_content(product)
 end
 
 Given /^I create a recipe called "(.*?)" with servings "(.*?)", cook time "(.*?)" and instructions "(.*?)" and "(.*?)"$/ do |name, servings, cook_time, instr1, instr2|

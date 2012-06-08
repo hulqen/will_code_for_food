@@ -11,10 +11,12 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     3.times { @recipe.instructions.build }
+    3.times { @recipe.ingredients.build }
   end
 
   def create
-    @recipe = Recipe.create(params[:recipe])
+    @recipe = Recipe.new(params[:recipe])
+
     if @recipe.save
       redirect_to root_url, :notice => "Receptet \"" + @recipe.name + "\" sparat!"
     else
