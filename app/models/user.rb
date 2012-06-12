@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
   attr_accessor :password
 
+  has_one :shopping_list, :dependent => :destroy
+
   before_save :encrypt_password
+  after_create :create_shopping_list
 
   validates_confirmation_of :password
   validates_presence_of     :password, :on => :create
@@ -25,4 +28,13 @@ class User < ActiveRecord::Base
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
+
+  def create_shopping_list
+    self.shopping_list = ShoppingList.create!(:name => "Min shoppinglista")
+  end
+
+  def to_param
+    "#{id}"
+  end
+
 end

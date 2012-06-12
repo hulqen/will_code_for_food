@@ -1,0 +1,13 @@
+<% sl = @shopping_list %>
+
+<h2><%= sl.name %></h2>
+<% if sl.sl_product_rows.size > 0 %>
+  <ul>
+    <% sl.sl_product_rows.each do |row| %>
+      <li><%= row.amount.to_s %> <%= row.unit.name %> <%= row.product.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Din shoppinglista är tom!<p>
+<% end %>
+<%= button_to "Rensa inköpslistan", clear_shopping_list_path, :method => :delete, :confirm => "Är du säker på att du vill tömma inköpslistan?" %>

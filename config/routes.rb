@@ -1,15 +1,21 @@
 Matplanera::Application.routes.draw do
-  get "recipes/id" => "recipes#show"
 
-  match "/log_in"     => "sessions#new",    :as => "log_in"
-  match "/new_recipe" => "recipes#new",     :as => "new_recipe"
-  delete "log_out"    => "sessions#destroy"
-  get "sign_up"       => "users#new",       :as => "sign_up"
-  get "recipes"       => "recipes#index",   :as => "recipes"
+  get   "recipes/id"         => "recipes#show"
+  get   "recipes"            => "recipes#index",           :as => "recipes"
+  match "new_recipe"         => "recipes#new",             :as => "new_recipe"
+
+  match "log_in"             => "sessions#new",            :as => "log_in"
+  delete "log_out"           => "sessions#destroy"
+
+  get   "shopping_list"      => "shopping_lists#show",     :as => "shopping_list"
+  match "shopping_list/:id"  => "shopping_lists#update",   :as => "add_recipe_to_shopping_list"
+  delete "shopping_list"     => "shopping_lists#destroy",  :as => "clear_shopping_list"
+  get   "sign_up"            => "users#new",               :as => "sign_up"
 
   resources :users
   resources :sessions
   resources :recipes
+  resources :shopping_lists
 
   root :to => "recipes#index"
 
@@ -60,11 +66,4 @@ Matplanera::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
 end
