@@ -1,8 +1,8 @@
 class Ingredient < ActiveRecord::Base
   attr_accessible :amount, :unit_name, :product_name, :unit_id
   belongs_to :recipe
-  belongs_to :product
   belongs_to :unit
+  belongs_to :product
 
   delegate :name, :to => :product, :prefix => true, :allow_nil => true
 

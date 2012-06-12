@@ -3,7 +3,9 @@ Then /^show me the page$/ do
 end
 
 Given /^I am on the "(.*?)" page$/ do |page_name|
-  visit('/' + page_name)
+  # page_name = page_name.to_param
+
+  visit('/' + page_name.gsub(" ", "_"))
 end
 
 When /^I view "(.*?)"$/ do |link_name|
