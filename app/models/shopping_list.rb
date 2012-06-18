@@ -7,14 +7,33 @@ class ShoppingList < ActiveRecord::Base
 
   def add_recipe(recipe)
     recipe.ingredients.each do |i|
-      params = {:amount => i.amount, :product_id => i.product_id, :recipe_id => i.recipe_id, :shopping_list_id => self.id, :unit_id => i.unit_id}
-      # puts params.inspect
-      self.sl_product_row = params
+      create_sl_product_row(i)
     end
   end
 
-  def sl_product_row= (value)
-    SlProductRow.create!(value)
+  def create_sl_product_row(i)
+    params = {:amount => i.amount, :product_id => i.product_id, :recipe_id => i.recipe_id, :unit_id => i.unit_id}
+    sl_product_rows.create!(params)
+  end
+
+  def recipe_id_for(name)
+    row = self.sl_product_rows.where("recipe_id = ?", Recipe.find_by_name(name))
+    row[0].recipe_id
+  end
+
+  def unique_recipe_names
+    recipe_names = []
+    sl_product_rows.each_with_index do |row, i|
+       recipe_names[i] = row.recipe.name
+    end
+    recipe_names.uniq
+  end
+
+  def unique_ingredients
+    sl_product_rows.inject(Hash.new(0)) do |result, row|
+      result[[row.product.name, row.unit.name]] += row.amount
+      result
+    end
   end
 
 end

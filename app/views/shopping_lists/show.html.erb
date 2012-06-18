@@ -2,9 +2,18 @@
 
 <h2><%= sl.name %></h2>
 <% if sl.sl_product_rows.size > 0 %>
+
   <ul>
-    <% sl.sl_product_rows.each do |row| %>
-      <li><%= row.amount.to_s %> <%= row.unit.name %> <%= row.product.name %></li>
+    <% unique_ingredients_for(sl) do |amount, unit_name, product_name| %>
+      <li><%= amount %> <%= unit_name %> <%= product_name %></li>
+    <% end %>
+  </ul>
+
+  <h2>Recept i listan:</h2>
+  <ul>
+    <% sl.unique_recipe_names.each do |name| %>
+      <% recipe_id = sl.recipe_id_for(name) %>
+      <li><%= name %> <%= link_to "Ta bort recept", delete_shopping_list_row_path(recipe_id), :method => :delete %></li>
     <% end %>
   </ul>
 <% else %>

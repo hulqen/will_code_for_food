@@ -35,6 +35,18 @@ Then /^I should see the ingredient "(.*?)" "(.*?)" "(.*?)"$/ do |amount, unit, p
   page.should have_content(product)
 end
 
+Then /^I should not see the ingredient "(.*?)" "(.*?)" "(.*?)"$/ do |amount, unit, product|
+  page.should_not have_content(amount)
+  page.should_not have_content(unit)
+  page.should_not have_content(product)
+end
+
+When /^I remove the recipe "(.*?)"$/ do |recipe_name|
+  within('li', :text => recipe_name) do
+    click_link('Ta bort recept')
+  end
+end
+
 Given /^I create a recipe called "(.*?)" with servings "(.*?)", cook time "(.*?)" and instructions "(.*?)" and "(.*?)"$/ do |name, servings, cook_time, instr1, instr2|
   fill_in('recipe_name', :with => name)
   select(servings, :from => 'recipe_servings')

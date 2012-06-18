@@ -1,5 +1,7 @@
 Matplanera::Application.routes.draw do
 
+  get "sl_product_row/destroy"
+
   get   "recipes/id"         => "recipes#show"
   get   "recipes"            => "recipes#index",           :as => "recipes"
   match "new_recipe"         => "recipes#new",             :as => "new_recipe"
@@ -10,6 +12,9 @@ Matplanera::Application.routes.draw do
   get   "shopping_list"      => "shopping_lists#show",     :as => "shopping_list"
   match "shopping_list/:id"  => "shopping_lists#update",   :as => "add_recipe_to_shopping_list"
   delete "shopping_list"     => "shopping_lists#destroy",  :as => "clear_shopping_list"
+
+  delete "sl_product_row/:id"    => "sl_product_row#destroy",  :as => "delete_shopping_list_row"
+
   get   "sign_up"            => "users#new",               :as => "sign_up"
 
   resources :users
