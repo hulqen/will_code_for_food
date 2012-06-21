@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  servings: 
-  cook_time: MyString
+  name: Korvgratäng
+  servings: 3
+  cook_time: 20 minuter
 
 two:
-  name: MyString
-  servings: 
-  cook_time: MyString
+  name: Saltad sill
+  servings: 4
+  cook_time: 40 minuter

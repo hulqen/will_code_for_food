@@ -1,0 +1,2 @@
+module RecipeCollectionsHelper
+end

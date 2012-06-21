@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  position: 1
+  comment: MyString
+  collection_block_id: MyString
+  recipe_id: 1
+  preferred_servings: 1
+
+two:
+  position: 1
+  comment: MyString
+  collection_block_id: MyString
+  recipe_id: 1
+  preferred_servings: 1

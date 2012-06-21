@@ -10,8 +10,8 @@ one:
 
 two:
   shopping_list_id: 1
-  product_id: 1
-  unit_id: 1
+  product_id: 2
+  unit_id: 2
   amount: 9.99
   recipe_id: 1
   in_basket: false
