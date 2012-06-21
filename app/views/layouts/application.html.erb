@@ -10,10 +10,11 @@
 
 <div id="user_nav">
   <% if current_user %>
-    Inloggad som <%= current_user.email %> <br />
-    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %> |
+    Inloggad som <%= current_user.email %> |
+    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %> | <br />
     <%= link_to "Skapa nytt recept", new_recipe_path %> |
-    <%= link_to "Min shoppinglista", shopping_list_path %>
+    <%= link_to "Min shoppinglista", shopping_list_path %> |
+    <%= link_to "Mina receptsamlingar", recipe_collections_path %>
   <% else %>
     <%= link_to "Registrera dig", sign_up_path %> eller
     <%= link_to "logga in", log_in_path %>

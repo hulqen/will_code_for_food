@@ -1,26 +1,33 @@
 Matplanera::Application.routes.draw do
 
-  get "sl_product_row/destroy"
+  # get   "recipes/:id"        => "recipes#show",             :as => "recipe"
+  # get   "recipes"            => "recipes#index",            :as => "recipes"
+  get   "new_recipe"         => "recipes#new",              :as => "new_recipe"
 
-  get   "recipes/id"         => "recipes#show"
-  get   "recipes"            => "recipes#index",           :as => "recipes"
-  match "new_recipe"         => "recipes#new",             :as => "new_recipe"
-
-  match "log_in"             => "sessions#new",            :as => "log_in"
+  match "log_in"             => "sessions#new",             :as => "log_in"
   delete "log_out"           => "sessions#destroy"
+  get   "sign_up"            => "users#new",                :as => "sign_up"
 
-  get   "shopping_list"      => "shopping_lists#show",     :as => "shopping_list"
-  match "shopping_list/:id"  => "shopping_lists#update",   :as => "add_recipe_to_shopping_list"
-  delete "shopping_list"     => "shopping_lists#destroy",  :as => "clear_shopping_list"
+  get   "shopping_list"      => "shopping_lists#show",      :as => "shopping_list"
+  match "shopping_list/:id"  => "shopping_lists#update",    :as => "add_recipe_to_shopping_list"
+  delete "shopping_list"     => "shopping_lists#destroy",   :as => "clear_shopping_list"
 
-  delete "sl_product_row/:id"    => "sl_product_row#destroy",  :as => "delete_shopping_list_row"
+  delete "sl_product_row/:id"=> "sl_product_rows#destroy",  :as => "delete_shopping_list_row"
 
-  get   "sign_up"            => "users#new",               :as => "sign_up"
+  get "collection_block"     => "collection_blocks#show"
+  post "collection_block"    => "collection_blocks#new",     :as => "new_collection_block"
+  delete "collection_block"  => "collection_blocks#destroy", :as => "delete_collection_block"
 
-  resources :users
+  get "recipe_collections"   => "recipe_collections#index", :as => "recipe_collections"
+  get "recipe_collection/:id"=> "recipe_collections#show",  :as => "show_recipe_collection"
+  post "recipe_collection"   => "recipe_collections#new",   :as => "new_recipe_collection"
+  delete "recipe_collection/:id" => "recipe_collections#destroy", :as => "delete_recipe_collection"
+
+  resources :users, :only => ["index", "show", "create"]
   resources :sessions
-  resources :recipes
-  resources :shopping_lists
+  resources :recipes, :only => ["index", "show", "create", "edit"]
+  # resources :shopping_lists
+  # resources :recipe_collections
 
   root :to => "recipes#index"
 
