@@ -1,0 +1,19 @@
+<% rc = @recipe_collection %>
+<h1><%= rc.name %></h1>
+<% if rc.collection_blocks.empty? %>
+  <p>Den här receptsamlingen har inga block! <%= link_to 'Klicka här', new_collection_block_path, :method => :post %> för att skapa ett! </p>
+<% else %>
+  <ul>
+    <% rc.collection_blocks.each do |block| %>
+      <li>
+        <%= block.name %>
+        <ul>
+          <% block.block_contents.each do |content| %>
+            <li><%= content.recipe.name %></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<%= button_to 'Ta bort receptsamlingen', delete_recipe_collection_path(rc), :method => :delete, :confirm => 'Är du säker?' %>
