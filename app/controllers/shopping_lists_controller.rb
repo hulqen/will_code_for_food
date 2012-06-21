@@ -1,12 +1,7 @@
 # encoding: utf-8
 class ShoppingListsController < ApplicationController
-  def index
-  end
 
   def update
-    # @shopping_list = current_user.shopping_list
-    # @shopping_list.add_recipe(@recipe)
-
     @recipe = Recipe.find(params[:id])
     if current_user.shopping_list.add_recipe(@recipe)
       flash[:notice] = 'Receptet är tillagt i din inköpslista!'
