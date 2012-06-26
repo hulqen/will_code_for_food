@@ -1,6 +1,6 @@
-<h1>Editing recipe_collection</h1>
+<h1>Redigera <%= @recipe_collection.name %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @recipe_collection %> |
-<%= link_to 'Back', recipe_collections_path %>
+<%= link_to 'Avbryt', recipe_collections_path %>
+<%= button_to 'Ta bort receptsamlingen', delete_recipe_collection_path(@recipe_collection), :method => :delete, :confirm => 'Är du säker?' %>

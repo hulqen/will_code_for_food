@@ -2,10 +2,10 @@
 <% if @recipe_collections %>
   <ul>
     <% @recipe_collections.each do |rc| %>
-      <li><%= link_to rc.name, show_recipe_collection_path(rc) %></li>
+      <li><%= link_to rc.name, recipe_collection_path(rc) %></li>
       <% end %>
   </ul>
-  <%= button_to 'Skapa ny receptsamling', new_recipe_collection_path %>
+  <%= link_to 'Skapa ny receptsamling', new_recipe_collection_path %>
 <% else %>
-  <p>Du har ingen receptsamling! <%= link_to 'Klicka här', new_collection_block_path, :method => :post %> för att skapa en </p>
+  <p>Du har ingen receptsamling! <%= link_to 'Klicka här', new_recipe_collection_path %> för att skapa en </p>
 <% end %>

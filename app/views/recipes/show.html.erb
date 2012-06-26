@@ -17,7 +17,8 @@
   <% end %>
 </ol>
 <% if current_user %>
-  <%= button_to "Redigera recept", edit_recipe_path(r) %>
+  <%= link_to "Redigera recept", edit_recipe_path(r) %>
   <%= button_to "Lägg till ingredienserna i min inköpslista", add_recipe_to_shopping_list_path(r) %>
+  <%= button_to "Lägg till receptet i min receptsamling", add_recipe_to_collection_path(r) %>
 <% end %>
 
