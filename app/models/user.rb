@@ -35,10 +35,13 @@ class User < ActiveRecord::Base
   end
 
   def create_recipe_collections
-    recipe_collections.create(:name => "Min receptsamling")
-    recipe_collections.create(:name => "Min veckoplan")
-    veckoplan = recipe_collections.find_by_name("Min veckoplan")
-    veckoplan.create_collection_blocks("veckoplan")
+    standard  = recipe_collections.build(:name => "Min receptsamling")
+    standard.create_collection_blocks("standard")
+    standard.save
+
+    week_plan = recipe_collections.build(:name => "Min veckoplan")
+    week_plan.create_collection_blocks("week_plan")
+    week_plan.save
   end
 
   def to_param

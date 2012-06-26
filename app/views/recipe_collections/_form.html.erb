@@ -1,12 +1,28 @@
-<%= simple_form_for(@recipe_collection) do |f| %>
-  <%= f.error_notification %>
+<%= nested_form_for(@recipe_collection) do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :user_id %>
-  </div>
+  <%= f.label :name, "Namn" %>
+  <%= f.text_field :name %><br />
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+  <h2>Block:</h2>
+  <ul>
+  <%= f.fields_for :collection_blocks do |cb| %>
+    <li>
+      <%= cb.text_field :name %>
+      <%= cb.link_to_remove "Ta bort block" %>
+      <ul>
+        <%= cb.fields_for :block_contents do |bc| %>
+          <li>
+            <%= bc.object.recipe_name %>
+            <%= bc.link_to_remove "Ta bort recept" %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+  <%= f.link_to_add "Lägg till block", :collection_blocks %>
+  </ul>
+
+  <%= f.submit 'Spara!' %>
 <% end %>
+
+

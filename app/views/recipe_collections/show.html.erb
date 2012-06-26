@@ -9,11 +9,12 @@
         <%= block.name %>
         <ul>
           <% block.block_contents.each do |content| %>
-            <li><%= content.recipe.name %></li>
+            <li><%= link_to content.recipe.name, recipe_path(content.recipe) %></li>
           <% end %>
         </ul>
       </li>
     <% end %>
   </ul>
 <% end %>
-<%= button_to 'Ta bort receptsamlingen', delete_recipe_collection_path(rc), :method => :delete, :confirm => 'Är du säker?' %>
+<%= link_to 'Redigera receptsamlingen', edit_recipe_collection_path(rc) %>
+<%= button_to 'Ta bort receptsamlingen', recipe_collection_path(rc), :method => :delete, :confirm => 'Är du säker?' %>
