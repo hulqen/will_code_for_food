@@ -1,9 +1,5 @@
 Matplanera::Application.routes.draw do
 
-  # get   "recipes/:id"        => "recipes#show",             :as => "recipe"
-  # get   "recipes"            => "recipes#index",            :as => "recipes"
-  get   "new_recipe"         => "recipes#new",              :as => "new_recipe"
-
   match "log_in"             => "sessions#new",             :as => "log_in"
   delete "log_out"           => "sessions#destroy"
   get   "sign_up"            => "users#new",                :as => "sign_up"
@@ -14,20 +10,13 @@ Matplanera::Application.routes.draw do
 
   delete "sl_product_row/:id"=> "sl_product_rows#destroy",  :as => "delete_shopping_list_row"
 
-  get "collection_block"     => "collection_blocks#show"
-  post "collection_block"    => "collection_blocks#new",     :as => "new_collection_block"
-  delete "collection_block"  => "collection_blocks#destroy", :as => "delete_collection_block"
+  post "collection_blocks/:id" => "collection_blocks#edit", :as => "add_recipe_to_collection"
 
-  get "recipe_collections"   => "recipe_collections#index", :as => "recipe_collections"
-  get "recipe_collection/:id"=> "recipe_collections#show",  :as => "show_recipe_collection"
-  post "recipe_collection"   => "recipe_collections#new",   :as => "new_recipe_collection"
-  delete "recipe_collection/:id" => "recipe_collections#destroy", :as => "delete_recipe_collection"
-
-  resources :users, :only => ["index", "show", "create"]
+  resources :users, :only => [:index, :show, :create]
   resources :sessions
-  resources :recipes, :only => ["index", "show", "create", "edit"]
-  # resources :shopping_lists
-  # resources :recipe_collections
+  resources :recipes
+  resources :collection_blocks, :except => :edit
+  resources :recipe_collections
 
   root :to => "recipes#index"
 
