@@ -4,11 +4,10 @@ Matplanera::Application.routes.draw do
   delete "log_out"           => "sessions#destroy"
   get   "sign_up"            => "users#new",                :as => "sign_up"
 
-  get   "shopping_list"      => "shopping_lists#show",      :as => "shopping_list"
-  match "shopping_list/:id"  => "shopping_lists#update",    :as => "add_recipe_to_shopping_list"
-  delete "shopping_list"     => "shopping_lists#destroy",   :as => "clear_shopping_list"
+  post "shopping_list/:id"   => "shopping_lists#add_recipe",:as => "add_recipe_to_shopping_list"
+  delete "shopping_list/:id" => "shopping_lists#destroy",   :as => "clear_shopping_list"
 
-  delete "sl_product_row/:id"=> "sl_product_rows#destroy",  :as => "delete_shopping_list_row"
+  delete "sl_product_row/:id"  => "sl_product_rows#destroy",:as => "delete_shopping_list_row"
 
   post "collection_blocks/:id" => "collection_blocks#edit", :as => "add_recipe_to_collection"
 
@@ -17,6 +16,7 @@ Matplanera::Application.routes.draw do
   resources :recipes
   resources :collection_blocks, :except => :edit
   resources :recipe_collections
+  resource :shopping_list
 
   root :to => "recipes#index"
 
