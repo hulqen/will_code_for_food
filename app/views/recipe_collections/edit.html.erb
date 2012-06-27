@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Avbryt', recipe_collections_path %>
-<%= button_to 'Ta bort receptsamlingen', delete_recipe_collection_path(@recipe_collection), :method => :delete, :confirm => 'Är du säker?' %>
+<%= button_to 'Ta bort receptsamlingen', recipe_collections_path(@recipe_collection), :method => :delete, :confirm => 'Är du säker?' %>
