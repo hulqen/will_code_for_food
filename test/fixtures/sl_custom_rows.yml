@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  shopping_list_id: 1
+  custom_product_id: 1
+  in_basket: false
+
+two:
+  shopping_list_id: 1
+  custom_product_id: 1
+  in_basket: false

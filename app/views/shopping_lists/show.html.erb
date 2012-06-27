@@ -1,4 +1,5 @@
 <% sl = @shopping_list %>
+<% cust_size = sl.sl_custom_rows.size %>
 
 <h2><%= sl.name %></h2>
 <% if sl.sl_product_rows.size > 0 %>
@@ -7,7 +8,27 @@
     <% unique_ingredients_for(sl) do |amount, unit_name, product_name| %>
       <li><%= amount %> <%= unit_name %> <%= product_name %></li>
     <% end %>
+
+    <% if sl.sl_custom_rows.size > 0 %>
+      <% sl.sl_custom_rows.each_with_index do |custom_row, i| %>
+        <% if i+1 < cust_size %>
+          <li><%= custom_row.custom_product_name %></li>
+        <% end %>
+      <% end %>
+    <% end %>
   </ul>
+
+  <h2>Lägg till egna varor:</h2>
+  <%= nested_form_for @shopping_list do |f| %>
+    <%= f.fields_for :sl_custom_rows do |custom_row| %>
+      <% next if custom_row.object.custom_product_name.present? %>
+      <%= custom_row.label :custom_product_name, "Namn" %>
+      <%= custom_row.text_field :custom_product_name %>
+      <%= custom_row.link_to_remove "Ta bort rad" %><br />
+    <% end %>
+    <%= f.link_to_add "Lägg till rad", :sl_custom_rows %>
+    <%= f.submit 'Spara!' %>
+  <% end %>
 
   <h2>Recept i listan:</h2>
   <ul>
@@ -19,4 +40,4 @@
 <% else %>
   <p>Din shoppinglista är tom!<p>
 <% end %>
-<%= button_to "Rensa inköpslistan", clear_shopping_list_path, :method => :delete, :confirm => "Är du säker på att du vill tömma inköpslistan?" %>
+<%= button_to "Rensa inköpslistan", clear_shopping_list_path(@shopping_list), :method => :delete, :confirm => "Är du säker på att du vill tömma inköpslistan?" %>

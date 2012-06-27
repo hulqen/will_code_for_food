@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
 
   has_one :shopping_list, :dependent => :destroy
   has_many :recipe_collections, :dependent => :destroy
+  has_many :custom_products
 
   before_save :encrypt_password
-  after_create :create_shopping_list, :create_recipe_collections
+  after_create :create_user_shopping_list, :create_recipe_collections
 
   validates_confirmation_of :password
   validates_presence_of     :password, :on => :create
@@ -30,8 +31,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def create_shopping_list
-    shopping_list = ShoppingList.create!(:name => "Min shoppinglista")
+  def create_user_shopping_list
+    create_shopping_list(:name => "Min shoppinglista")
   end
 
   def create_recipe_collections

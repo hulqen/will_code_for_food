@@ -1,9 +1,11 @@
 class ShoppingList < ActiveRecord::Base
-  attr_accessible :name, :user_id, :sl_product_row
+  attr_accessible :name, :user_id, :sl_product_row, :sl_custom_rows_attributes
   belongs_to :user
   has_many :sl_product_rows, :dependent => :delete_all
+  has_many :sl_custom_rows, :dependent => :delete_all
 
   accepts_nested_attributes_for :sl_product_rows, :allow_destroy => :true
+  accepts_nested_attributes_for :sl_custom_rows, :allow_destroy => :true
 
   def add_recipe(recipe)
     recipe.ingredients.each do |i|
