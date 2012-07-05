@@ -29,6 +29,7 @@ class ShoppingListsController < ApplicationController
   def destroy
     @shopping_list = current_user.shopping_list
     @shopping_list.sl_product_rows.clear
+    @shopping_list.sl_custom_rows.clear
 
     redirect_to shopping_list_url
   end

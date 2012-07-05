@@ -5,4 +5,6 @@ class SlProductRow < ActiveRecord::Base
   belongs_to :product
   belongs_to :unit
 
+  delegate :name, :to => :product, :prefix => true, :allow_nil => true
+  delegate :name, :to => :unit, :prefix => true, :allow_nil => true
 end

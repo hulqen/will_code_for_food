@@ -2,21 +2,26 @@
 <% cust_size = sl.sl_custom_rows.size %>
 
 <h2><%= sl.name %></h2>
-<% if sl.sl_product_rows.size > 0 %>
 
-  <ul>
+<ul>
+  <% if sl.sl_product_rows.size > 0 %>
     <% unique_ingredients_for(sl) do |amount, unit_name, product_name| %>
       <li><%= amount %> <%= unit_name %> <%= product_name %></li>
     <% end %>
+  <% end %>
 
-    <% if sl.sl_custom_rows.size > 0 %>
-      <% sl.sl_custom_rows.each_with_index do |custom_row, i| %>
-        <% if i+1 < cust_size %>
-          <li><%= custom_row.custom_product_name %></li>
-        <% end %>
+  <% if cust_size > 0 %>
+    <% sl.sl_custom_rows.each_with_index do |custom_row, i| %>
+      <% if i+1 < cust_size %>
+        <li><%= custom_row.custom_product_name %></li>
       <% end %>
     <% end %>
-  </ul>
+  <% end %>
+
+  <% if sl.sl_product_rows.empty? and !sl.sl_custom_rows.exists? %>
+    <p>Din shoppinglista är tom!<p>
+  <% end %>
+</ul>
 
   <h2>Lägg till egna varor:</h2>
   <%= nested_form_for @shopping_list do |f| %>
@@ -30,14 +35,14 @@
     <%= f.submit 'Spara!' %>
   <% end %>
 
+<% if sl.sl_product_rows.size > 0 %>
   <h2>Recept i listan:</h2>
   <ul>
     <% sl.unique_recipe_names.each do |name| %>
       <% recipe_id = sl.recipe_id_for(name) %>
-      <li><%= name %> <%= link_to "Ta bort recept", delete_shopping_list_row_path(recipe_id), :method => :delete %></li>
+      <li><%= link_to name, recipe_path(recipe_id) %> <%= link_to "Ta bort recept", delete_shopping_list_row_path(recipe_id), :method => :delete %></li>
     <% end %>
   </ul>
-<% else %>
-  <p>Din shoppinglista är tom!<p>
 <% end %>
+
 <%= button_to "Rensa inköpslistan", clear_shopping_list_path(@shopping_list), :method => :delete, :confirm => "Är du säker på att du vill tömma inköpslistan?" %>
