@@ -8,4 +8,5 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :ingredients,  :reject_if => lambda { |a| a[:product_name].blank? }, :allow_destroy => :true
 
   validates_presence_of :name, :servings
+
 end
