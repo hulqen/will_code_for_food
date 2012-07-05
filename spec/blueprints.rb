@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'machinist/active_record'
 
 User.blueprint do
@@ -6,7 +7,7 @@ User.blueprint do
 end
 
 ShoppingList.blueprint do
-  name            { "Min shoppinglista#{sn}"}
+  name            { "Min shoppinglista#{sn}" }
 end
 
 Recipe.blueprint do
@@ -18,21 +19,24 @@ Recipe.blueprint do
 end
 
 Instruction.blueprint do
-  text            { "instruktion#{sn}"}
+  text            { "instruktion#{sn}" }
   step            { rand(20) }
 end
 
 Ingredient.blueprint do
-  amount          { rand(200) }
-  unit
-  product
+  product         { Product.make }
+end
+
+Ingredient.blueprint(:with_unit) do
+  unit            { Unit.make! }
+  amount          { 1 }
 end
 
 Unit.blueprint do
-  name            { "unit_name#{sn}"}
+  name            { "unit_name#{sn}" }
 end
 
 Product.blueprint do
-  name            { "product_name#{sn}"}
+  name            { "product_name#{sn}" }
 end
 

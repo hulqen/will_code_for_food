@@ -3,3 +3,28 @@
 
 en:
   hello: "Hello world"
+
+  weight:
+    unit:
+      one:   "gram"
+      other: "gram"
+    hundred:
+      one:   "hekto"
+      other: "hekto"
+    thousand:
+      one:   "kilo"
+      other: "kilo"
+
+  liquid:
+    mili:
+      one:   "milliliter"
+      other: "milliliter"
+    centi:
+      one:   "centiliter"
+      other: "centiliter"
+    deci:
+      one:   "deciliter"
+      other: "deciliter"
+    unit: 
+      one:   "liter"
+      other: "liter"
