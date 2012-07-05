@@ -7,8 +7,8 @@
 <ul>
   
 
-    <% humanize_ingredients(r.ingredients) do |amount, unit_name, product_name| %>
-      <li><%= amount %> <%= unit_name %> <%= product_name %></li>
+    <% humanize_ingredients(r.ingredients) do |amount_and_unit_name, product_name| %>
+      <li><%= amount_and_unit_name %> <%= product_name %></li>
     <% end %>
 
 </ul>

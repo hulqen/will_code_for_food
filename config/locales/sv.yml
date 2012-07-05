@@ -1,0 +1,67 @@
+# Sample localization file for Swedish. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+# encoding: utf-8
+
+sv:
+  hello: "Hej världen"
+
+  g:
+    unit:
+      "gram"
+    hundred:
+      "hekto"
+    thousand:
+      "kilo"
+
+  l:
+    mili:
+      "milliliter"
+    centi:
+      "centiliter"
+    deci:
+      "deciliter"
+    unit:
+      "liter"
+
+  st:
+    unit:
+      one: "styck"
+      other: "stycken"
+
+  burk: 
+    unit:
+      one: "burk"
+      other: "burkar"
+
+  skiva:
+    unit:
+      one: "skiva"
+      other: "skivor"
+
+  nypa: 
+    unit:
+      one: "nypa"
+      other: "nypor"
+
+  krm:
+    unit:
+      "kryddmått"
+
+  tsk: 
+    unit:
+      one: "tesked"
+      other: "teskedar"
+
+  msk:
+    unit:
+      one: "matsked"
+      other: "matskedar" 
+
+  pkt:
+    unit:
+      "paket" 
+
+  knippe:
+    unit:
+      one: "knippe"
+      other: "knippen"
