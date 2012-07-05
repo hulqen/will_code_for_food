@@ -10,8 +10,7 @@ class Ingredient < ActiveRecord::Base
 
   validates_presence_of :product
   validates_presence_of :amount, :if => proc { unit_name.present? }
-  validates_presence_of :unit_name, :if => :amount
-  validates_inclusion_of :unit_name, :in => Units, :if => :unit_name
+  validates_inclusion_of :unit_name, :in => Units, :if => :amount
 
   delegate :name, :to => :product, :prefix => true, :allow_nil => true
 

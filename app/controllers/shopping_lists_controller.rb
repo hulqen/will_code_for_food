@@ -4,7 +4,7 @@ class ShoppingListsController < ApplicationController
   def add_recipe
     @recipe = Recipe.find(params[:id])
     if current_user.shopping_list.add_recipe(@recipe)
-      flash[:notice] = "#{@recipe.name} är tillagt i din inköpslista!"
+      flash[:notice] = "Receptet \"#{@recipe.name}\" är tillagt i din inköpslista!"
       redirect_to shopping_list_url
     else
       return nil
