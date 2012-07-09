@@ -7,6 +7,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :instructions, :reject_if => lambda { |a| a[:text].blank? }, :allow_destroy => :true
   accepts_nested_attributes_for :ingredients,  :reject_if => lambda { |a| a[:product_name].blank? }, :allow_destroy => :true
 
-  validates_presence_of :name, :servings
+  validates_presence_of :name, :servings, :cook_time
+  validates_uniqueness_of :name
 
 end
