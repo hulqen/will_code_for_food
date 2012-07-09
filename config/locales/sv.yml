@@ -65,3 +65,20 @@ sv:
     unit:
       one: "knippe"
       other: "knippen"
+
+  activerecord:
+    errors:
+      models:
+        ingredient:
+          attributes:
+            amount:
+              blank: "Du måste välja en enhet om du fyller i mängd!"
+            unit_name: 
+              inclusion: "Du glömde att fylla i mängd!"
+        recipe:
+          attributes:
+            name: 
+              taken: "Ett recept med det namnet finns redan!"
+              blank: "Du måste fylla i ett namn på ditt recept!"
+            cook_time:
+              blank: "Du måste fylla i tillagningstid!"

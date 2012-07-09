@@ -5,12 +5,9 @@
 
 <h2>Ingredienser:</h2>
 <ul>
-  
-
-    <% humanize_ingredients(r.ingredients) do |amount_and_unit_name, product_name| %>
-      <li><%= amount_and_unit_name %> <%= product_name %></li>
-    <% end %>
-
+  <% humanize_ingredients(r.ingredients) do |amount_and_unit_name, product_name| %>
+    <li><%= amount_and_unit_name %> <%= product_name %></li>
+  <% end %>
 </ul>
 
 <h2>Gör så här:</h2>

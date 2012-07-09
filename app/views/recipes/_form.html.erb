@@ -1,4 +1,13 @@
+<% if @recipe.errors.present? %>
+  <p>Oops! 
+  <% @recipe.errors.each do |key, error| %>
+    <%= error %>
+  <% end %>
+  </p>
+<% end %>
+
 <%= nested_form_for @recipe do |f| %>
+
   <%= f.label :name, "Namn" %>
   <%= f.text_field :name %><br />
 
