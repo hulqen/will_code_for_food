@@ -5,6 +5,18 @@ Given /^I have added the recipe "(.*?)" to my shopping list$/ do |recipe_name|
 end
 
 When /^I add the following stuff: "(.*?)", "(.*?)", "(.*?)"$/ do |stuff1, stuff2, stuff3|
-  click_link('Lägg till rad')
-  fill_in()
+  find '.edit_shopping_list' do
+    click_link 'Lägg till rad'
+  end
+  find '.edit_shopping_list' do
+    find '.fields:nth-child(4)' do 
+      fill_in stuff1
+    end
+  end
+    # find '.fields:nth-child(5)' do 
+    #   fill_in stuff2
+    # end
+    # find '.fields:nth-child(6)' do 
+    #   fill_in stuff3
+    # end
 end

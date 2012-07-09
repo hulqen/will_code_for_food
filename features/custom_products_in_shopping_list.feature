@@ -13,4 +13,5 @@ Feature: Custom products in shopping list
 
   Scenario: Adding custom stuff to my shopping list
     When I add the following stuff: "glass", "spik", "julgransfot"
+    And show me the page
     Then I should see "glass", "spik" and "julgransfot" 
