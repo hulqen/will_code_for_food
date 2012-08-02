@@ -28,6 +28,8 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'machinist'
+  # gem 'capybara-webkit'
+  gem 'pry'
 end
 
 
