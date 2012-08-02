@@ -32,7 +32,6 @@ class Ingredient < ActiveRecord::Base
   protected
 
   def convert_unit
-    puts "hej"
     final_unit, new_amount = case unit_name
       when "ml"
         ["l", amount / 1000]
@@ -44,12 +43,12 @@ class Ingredient < ActiveRecord::Base
         ["g", amount * 100]
       when "kg"
         ["g", amount * 1000]
-      else 
+      else
         unit_name
     end
 
     self.amount = new_amount if new_amount != nil
-    self.unit = Unit.find_by_name(final_unit) 
+    self.unit = Unit.find_by_name!(final_unit)
   end
 
 
