@@ -1,39 +1,63 @@
 <% sl = @shopping_list %>
 <% cust_size = sl.sl_custom_rows.size %>
+<% not_in_basket = false %>
+<% in_basket     = true %>
 
 <h2><%= sl.name %></h2>
 
 <ul>
   <% if sl.sl_product_rows.size > 0 %>
-    <% unique_ingredients_for(sl) do |amount, unit_name, product_name| %>
-      <li><%= amount %> <%= unit_name %> <%= product_name %></li>
+    <% unique_ingredients_for(sl, not_in_basket) do |complete_ingredient, product_name| %>
+      <li><%= link_to complete_ingredient, product_shop_path(product_name) %></li>
     <% end %>
   <% end %>
 
   <% if cust_size > 0 %>
     <% sl.sl_custom_rows.each_with_index do |custom_row, i| %>
       <% if i+1 < cust_size %>
-        <li><%= custom_row.custom_product_name %></li>
+        <% if !custom_row.in_basket %>
+          <li><%= link_to custom_row.custom_product_name, custom_product_shop_path(custom_row.custom_product_id) %></li>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
+</ul>
 
-  <% if sl.sl_product_rows.empty? and !sl.sl_custom_rows.exists? %>
-    <p>Din shoppinglista är tom!<p>
+<% if sl.sl_product_rows.empty? and !sl.sl_custom_rows.exists? %>
+  <p>Din shoppinglista är tom!<p>
+<% end %>
+
+<h3>I varukorgen: </h3>
+<ul>
+  <% if sl.sl_product_rows.size > 0 %>
+    <% unique_ingredients_for(sl, in_basket) do |complete_ingredient, product_name| %>
+      <li><%= link_to complete_ingredient, product_unshop_path(product_name), :method => :put %></li>
+    <% end %>
+  <% end %>
+
+  <% if cust_size > 0 %>
+    <% sl.sl_custom_rows.each_with_index do |custom_row, i| %>
+      <% if i+1 < cust_size %>
+        <% if custom_row.in_basket %>
+          <li><%= link_to custom_row.custom_product_name, custom_product_unshop_path(custom_row.custom_product_id), :method => :put %></li>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 </ul>
 
-  <h2>Lägg till egna varor:</h2>
-  <%= nested_form_for @shopping_list do |f| %>
-    <%= f.fields_for :sl_custom_rows do |custom_row| %>
-      <% next if custom_row.object.custom_product_name.present? %>
-      <%= custom_row.label :custom_product_name, "Namn" %>
-      <%= custom_row.text_field :custom_product_name %>
-      <%= custom_row.link_to_remove "Ta bort rad" %><br />
-    <% end %>
-    <%= f.link_to_add "Lägg till rad", :sl_custom_rows %>
-    <%= f.submit 'Spara!' %>
+
+<h2>Lägg till egna varor:</h2>
+<%= nested_form_for @shopping_list do |f| %>
+  <%= f.fields_for :sl_custom_rows do |custom_row| %>
+    <% next if custom_row.object.custom_product_name.present? %>
+    <%= custom_row.label :custom_product_name, "Namn" %>
+    <%= custom_row.text_field :custom_product_name %>
+    <%= custom_row.link_to_remove "Ta bort rad" %><br />
   <% end %>
+  <%= f.link_to_add "Lägg till rad", :sl_custom_rows %>
+  <%= f.submit 'Spara!' %>
+<% end %>
 
 <% if sl.sl_product_rows.size > 0 %>
   <h2>Recept i listan:</h2>

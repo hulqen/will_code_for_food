@@ -8,6 +8,11 @@ Matplanera::Application.routes.draw do
   delete "shopping_list/:id" => "shopping_lists#destroy",   :as => "clear_shopping_list"
 
   delete "sl_product_row/:id"  => "sl_product_rows#destroy",:as => "delete_shopping_list_row"
+  get "sl_product_row/:product_name" => "sl_product_rows#shop",   :as => "product_shop"
+  put "sl_product_row/:product_name" => "sl_product_rows#unshop", :as => "product_unshop"
+
+  get "sl_custom_row/:id" => "sl_custom_rows#shop",   :as => "custom_product_shop"
+  put "sl_custom_row/:id" => "sl_custom_rows#unshop", :as => "custom_product_unshop"
 
   post "collection_blocks/:id" => "collection_blocks#edit", :as => "add_recipe_to_collection"
 
@@ -16,7 +21,8 @@ Matplanera::Application.routes.draw do
   resources :recipes
   resources :collection_blocks, :except => :edit
   resources :recipe_collections
-  resource :shopping_list
+  resource :shopping_list, :except => :destroy
+  resources :block_contents, :only => :update
 
   root :to => "recipes#index"
 

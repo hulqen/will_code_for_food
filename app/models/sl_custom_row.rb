@@ -1,7 +1,10 @@
+# encoding: utf-8
 class SlCustomRow < ActiveRecord::Base
-  attr_accessible :custom_product_id, :in_basket, :shopping_list_id, :custom_product_name
+  attr_accessible :in_basket, :custom_product_name
   belongs_to :shopping_list
   belongs_to :custom_product
+
+  validates_presence_of :custom_product_id
 
   delegate :name, :to => :custom_product, :prefix => true, :allow_nil => true
 
