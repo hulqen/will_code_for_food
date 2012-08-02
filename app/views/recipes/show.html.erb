@@ -1,11 +1,14 @@
 <% r = @recipe %>
 <h1><%= r.name %></h1>
 <h2>Tillagningstid: <%= r.cook_time %></h2>
-<h2>Portioner: <%= r.servings %></h2>
+<h2>Portioner: </h2>
+<%= form_tag(r, :method => :get) do %>
+  <%= select_tag :preferred_servings, options_for_select(1..24, @preferred_servings), {:onchange => 'this.form.submit()'} %>
+<% end %>
 
 <h2>Ingredienser:</h2>
 <ul>
-  <% humanize_ingredients(r.ingredients) do |amount_and_unit_name, product_name| %>
+  <% humanize_ingredients(r.ingredients, @preferred_servings.to_f / r.servings) do |amount_and_unit_name, product_name| %>
     <li><%= amount_and_unit_name %> <%= product_name %></li>
   <% end %>
 </ul>
@@ -18,7 +21,7 @@
 </ol>
 <% if current_user %>
   <%= link_to "Redigera recept", edit_recipe_path(r) %>
-  <%= button_to "Lägg till ingredienserna i min inköpslista", add_recipe_to_shopping_list_path(r) %>
-  <%= button_to "Lägg till receptet i min receptsamling", add_recipe_to_collection_path(r) %>
+  <%= button_to "Lägg till ingredienserna i min inköpslista", add_recipe_to_shopping_list_path(r, :preferred_servings => @preferred_servings) %>
+  <%= button_to "Lägg till receptet i min receptsamling", add_recipe_to_collection_path(r, :preferred_servings => @preferred_servings) %>
 <% end %>
 

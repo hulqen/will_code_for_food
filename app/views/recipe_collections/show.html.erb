@@ -9,7 +9,11 @@
         <%= block.name %>
         <ul>
           <% block.block_contents.each do |content| %>
-            <li><%= link_to content.recipe.name, recipe_path(content.recipe) %></li>
+            <li><%= link_to content.recipe.name, recipe_path(content.recipe, :preferred_servings => content.preferred_servings) %>,
+              <%= form_tag(content, :method => :put) do %>
+                <%= select_tag :preferred_servings, options_for_select(1..24, content.preferred_servings || content.recipe.servings), {:onchange => 'this.form.submit()', :class => "inline"} %>
+              <% end %>
+            portioner</li>
           <% end %>
         </ul>
       </li>

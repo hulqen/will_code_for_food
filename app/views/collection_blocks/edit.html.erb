@@ -1,4 +1,5 @@
 <% rc = @recipe_collections %>
+<% pf = @preferred_servings %>
 <h2>Var vill du spara <%= @recipe.name %>?</h2>
 <ul>
   <% rc.each do |collection| %>
@@ -6,7 +7,7 @@
       <%= collection.name %>
       <ul>
       <% collection.collection_blocks.each do |block| %>
-        <li><%= link_to block.name, collection_block_path(block, :recipe_id => @recipe.id), :method => :put  %></li>
+        <li><%= link_to block.name, collection_block_path(block, :recipe_id => @recipe.id, :preferred_servings => pf), :method => :put  %></li>
         <% end %>
       </ul>
     </li>

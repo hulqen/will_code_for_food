@@ -1,23 +1,23 @@
 module IngredientFormatterHelper
 
-  def unique_ingredients_for(sl)
-    sl.unique_ingredients.each do |product_name_and_unit, incoming_amount|
+  def unique_ingredients_for(sl, in_basket)
+    sl.unique_ingredients(in_basket).each do |product_name_and_unit, incoming_amount|
       unit_name    = product_name_and_unit[1]
       product_name = product_name_and_unit[0]
-      
+
       if unit_name
-        amount_and_unit_name = human_numbers(incoming_amount, unit_name)
+        complete_ingredient = human_numbers(incoming_amount, unit_name)+" "+product_name
       else
-        amount_and_unit_name = nil
+        complete_ingredient = product_name
       end
-      yield amount_and_unit_name, product_name
+      yield complete_ingredient, product_name
     end
   end
 
-  def humanize_ingredients(ingredient)
-    ingredient.each do |i|
+  def humanize_ingredients(ingredients, amount_multiplier)
+    ingredients.each do |i|
       if i.unit
-        amount_and_unit_name = human_numbers(i.amount, i.unit_name)
+        amount_and_unit_name = human_numbers(i.amount * amount_multiplier, i.unit_name)
       else
         amount_and_unit_name = nil
       end

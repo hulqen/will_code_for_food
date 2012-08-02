@@ -1,11 +1,12 @@
 # encoding: utf-8
 class RecipesController < ApplicationController
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.search(params[:search])
   end
 
   def show
     @recipe = Recipe.find(params[:id])
+    @preferred_servings = params[:preferred_servings] || @recipe.servings
   end
 
   def new
