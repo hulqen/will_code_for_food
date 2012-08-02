@@ -20,6 +20,11 @@
     <%= link_to "logga in", log_in_path %>
   <% end %> |
   <%= link_to "Receptlistan", recipes_path %>
+
+  <%= form_tag recipes_path, :method => 'get' do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Sök", :name => nil %>
+  <% end %>
 </div>
 
 <% flash.each do |name, msg| %>

@@ -10,4 +10,14 @@ class Recipe < ActiveRecord::Base
   validates_presence_of :name, :servings, :cook_time
   validates_uniqueness_of :name
 
+  def self.search(search_string)
+    if search_string
+      where('name LIKE ?', "%#{search_string}%")
+    else
+      all
+    end
+  end
+
+  def change_servings
+  end
 end
