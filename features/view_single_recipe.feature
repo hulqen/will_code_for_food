@@ -5,9 +5,11 @@ Feature: View details of a single recipe
   I want to check the details of a recipe
 
   Scenario: Viewing details of a recipe
-    Given there is a recipe called "Korv stroganoff" that has servings "5" and cook time "20 minuter" and the following ingredients:
+    Given there is a unit called "l"
+    And there is a unit called "g"
+    And there is a recipe called "Korv stroganoff" that has servings "6" and cook time "20 minuter" and the following ingredients:
       | amount | unit      | product|
-      | 300    | gram      | korv   |
+      | 300    | g         | korv   |
       | 5      | dl        | ris    |
     And the instructions:
       | text |
@@ -16,8 +18,8 @@ Feature: View details of a single recipe
 
     And I am on the "recipes" page
     When I view "Korv stroganoff"
-    Then I should see servings "5" and cook time "20 minuter"
-    And I should see the ingredient "300" "gram" "korv"
-    And I should see the ingredient "5" "dl" "ris"
+    Then I should see servings "6" and cook time "20 minuter"
+    And I should see the ingredient "3" "hekto" "korv"
+    And I should see the ingredient "5" "deciliter" "ris"
     And I should see instruction "Koka riset"
     And I should see instruction "Skär korven i stavar"

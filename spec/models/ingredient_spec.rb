@@ -15,12 +15,12 @@ describe "Ingredient" do
 
     it "requires a unit if amount is set" do
       ingredient.amount = 32
-      ingredient.should have(1).error_on(:incoming_unit_name)
+      ingredient.should have(1).error_on(:unit_name)
     end
 
     it "requires an amount if unit is set" do
       unit = Unit.make!
-      ingredient.incoming_unit_name = unit.name
+      ingredient.unit_name = unit.name
       ingredient.should have(1).error_on(:amount)
     end
   end
@@ -31,49 +31,49 @@ describe "Ingredient" do
       @unit2 = Unit.make!(:name => "skiva")
       Unit.make!(:name => "st")
       # Obs! Notera att "new" inte kör några valideringar (jmf "make" och "create")
-      @ingredient = Ingredient.make!(:incoming_unit_name =>"st", :amount => 32)
+      @ingredient = Ingredient.make!(:unit_name =>"st", :amount => 32)
     end
 
     it "sets the unit to the unit with the given name" do
       puts @ingredient.inspect
-      @ingredient.incoming_unit_name = "skiva"
+      @ingredient.unit_name = "skiva"
       @ingredient.save!
       @ingredient.unit.should eq(@unit2)
     end
 
     it "keeps the amount when unit not converted" do
-      @ingredient.incoming_unit_name = "burk"
+      @ingredient.unit_name = "burk"
       @ingredient.save!
       @ingredient.amount.should eq(32)
     end
 
     it "raises error when given a unit not in the units array" do
-      @ingredient.incoming_unit_name = "hekto"
+      @ingredient.unit_name = "hekto"
       expect{@ingredient.save!}.to raise_error
     end
 
     describe "to liters" do
       before do
         Unit.make!(:name => "l")
-        @ingredient = Ingredient.make!(:amount => 3245, :incoming_unit_name => "burk")
+        @ingredient = Ingredient.make!(:amount => 3245, :unit_name => "burk")
       end
 
       it "converts unit from ml to l" do
-        @ingredient.incoming_unit_name = "ml"
+        @ingredient.unit_name = "ml"
         @ingredient.save!
         @ingredient.unit.name.should eq("l")
         @ingredient.amount.should eq(3.245)
       end
 
       it "converts unit from cl to l" do
-        @ingredient.incoming_unit_name = "cl"
+        @ingredient.unit_name = "cl"
         @ingredient.save!
         @ingredient.unit.name.should eq("l")
         @ingredient.amount.should eq(32.45)
       end
 
       it "converts unit from dl to l" do
-        @ingredient.incoming_unit_name = "dl"
+        @ingredient.unit_name = "dl"
         @ingredient.save!
         @ingredient.unit.name.should eq("l")
         @ingredient.amount.should eq(324.5)
@@ -83,18 +83,18 @@ describe "Ingredient" do
     describe "to grams" do
       before do
         Unit.make!(:name => "g")
-        @ingredient = Ingredient.make!(:amount => 32, :incoming_unit_name => "burk")
+        @ingredient = Ingredient.make!(:amount => 32, :unit_name => "burk")
       end
 
       it "converts unit from hg to g" do
-        @ingredient.incoming_unit_name = "hg"
+        @ingredient.unit_name = "hg"
         @ingredient.save!
         @ingredient.unit.name.should eq("g")
         @ingredient.amount.should eq(3200)
       end
 
       it "converts unit from kg to g" do
-        @ingredient.incoming_unit_name = "kg"
+        @ingredient.unit_name = "kg"
         @ingredient.save!
         @ingredient.unit.name.should eq("g")
         @ingredient.amount.should eq(32000)

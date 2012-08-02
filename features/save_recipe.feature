@@ -6,7 +6,7 @@ Feature: Save a recipe
 
   Background: Saving a recipe
     Given I am logged in
-    And I am on the "new_recipe" page
+    And I am on the "recipes/new" page
     And I create a recipe called "Laxpytt" with servings "5", cook time "20 minuter" and instructions "skala laxen" and "stek potatis"
 
   Scenario: My saved recipe in the list

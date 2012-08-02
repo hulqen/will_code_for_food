@@ -7,4 +7,4 @@ Feature: User login
   Scenario: Logging in
     Given I, "mat@plan.se", have an account
     When I log in
-    Then I should get the message "Inloggad! Välkommen mat@plan.se"
+    Then I should get the message "Välkommen mat@plan.se"

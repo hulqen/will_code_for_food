@@ -10,7 +10,25 @@ require_relative 'blueprints'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+Capybara.javascript_driver = :webkit
+
 RSpec.configure do |config|
+
+  # config.treat_symbols_as_metadata_keys_with_true_values = true
+  # config.use_transactional_fixtures = false
+
+  # config.before do
+  #   if example.metadata[:type] == :request and Capybara.current_driver != :rack_test
+  #     DatabaseCleaner.strategy = :truncation
+  #   else
+  #     DatabaseCleaner.strategy = :transaction
+  #   end
+  #   DatabaseCleaner.start
+  # end
+
+  # config.after do
+  #   DatabaseCleaner.clean
+  # end
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

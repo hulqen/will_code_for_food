@@ -4,9 +4,9 @@ Then /^I should see the recipe collection "(.*?)"$/ do |recipe_collection|
 end
 
 Given /^I have added the recipes "(.*?)", "(.*?)" and "(.*?)" to the recipe collection "(.*?)"$/ do |recipe1, recipe2, recipe3, recipe_collection|
-  @user.recipe_collections.find_by_name("Min veckoplan").collection_blocks.find(1).add_recipe(create_recipe(recipe1))
-  @user.recipe_collections.find_by_name("Min veckoplan").collection_blocks.find(2).add_recipe(create_recipe(recipe2))
-  @user.recipe_collections.find_by_name("Min veckoplan").collection_blocks.find(3).add_recipe(create_recipe(recipe3))
+  @user.recipe_collections.find_by_name(recipe_collection).collection_blocks.find(2).add_recipe(create_recipe(recipe1), 6)
+  @user.recipe_collections.find_by_name(recipe_collection).collection_blocks.find(3).add_recipe(create_recipe(recipe2), 6)
+  @user.recipe_collections.find_by_name(recipe_collection).collection_blocks.find(4).add_recipe(create_recipe(recipe3), 6)
 end
 
 Then /^I should see "(.*?)", "(.*?)" and "(.*?)"$/ do |block1, block2, block3|
