@@ -2,37 +2,88 @@
 <html>
 <head>
   <title>Matplanera</title>
+   <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <style type="text/css">
+  </style>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<div id="user_nav">
-  <% if current_user %>
-    Inloggad som <%= current_user.email %> |
-    <%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %> | <br />
-    <%= link_to "Skapa nytt recept", new_recipe_path %> |
-    <%= link_to "Min shoppinglista", shopping_list_path %> |
-    <%= link_to "Mina receptsamlingar", recipe_collections_path %>
-  <% else %>
-    <%= link_to "Registrera dig", sign_up_path %> eller
-    <%= link_to "logga in", log_in_path %>
-  <% end %> |
-  <%= link_to "Receptlistan", recipes_path %>
-
-  <%= form_tag recipes_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Sök", :name => nil %>
-  <% end %>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">Matplanera</a>
+      <div class="btn-group pull-right">
+        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-user"></i>
+          <% if current_user %>
+            <%= current_user.email %>
+          <% else %>
+            Logga in
+          <% end %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <% if current_user %>
+            <li>Inloggad som <%= current_user.email %></li>
+            <li class="divider"></li>
+            <li><%= link_to "Logga ut", log_out_path, :id => "log_out", :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Registrera dig", sign_up_path %></li>
+            <li class="divider"></li>
+            <li><%= link_to "logga in", log_in_path %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <% if current_user %>
+            <li><%= link_to "Skapa nytt recept", new_recipe_path %> </li>
+            <li><%= link_to "Min shoppinglista", shopping_list_path %> </li>
+            <li><%= link_to "Mina receptsamlingar", recipe_collections_path %> </li>
+          <% else %>
+            <li><%= link_to "Registrera dig", sign_up_path %></li>
+            <li><%= link_to "logga in", log_in_path %></li>
+          <% end %>
+          <li><%= link_to "Receptlistan", recipes_path %></li>
+        </ul>
+        <%= form_tag recipes_path, :class =>"navbar-search pull-left", :method => 'get' do %>
+          <%= text_field_tag :search, params[:search], :class=>"search-query", :placeholder => "Sök recept" %>
+        <% end %>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 </div>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% if flash[:alert] %>
+  <%= content_tag :div, :id => "flash_alert", :class =>"alert alert-error" do %>
+    <button class="close" data-dismiss="alert">×</button>
+      <%= flash[:alert] %>
+  <% end %>
 <% end %>
 
+<% if flash[:notice] %>
+  <%= content_tag :div, :id => "flash_notice", :class =>"alert alert-success" do %>
+    <button class="close" data-dismiss="alert">×</button>
+      <%= flash[:notice] %>
+  <% end %>
+<% end %>
+
+<div class="container">
 
 <%= yield %>
+
+</div> <!-- /container -->
 
 </body>
 </html>

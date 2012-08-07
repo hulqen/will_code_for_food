@@ -1,5 +1,5 @@
 <h1>Recept</h1>
-<ul>
+<ul class="unstyled">
   <% @recipes.each do |r| %>
     <li><%= link_to r.name, recipe_path(r) %></li>
   <% end %>

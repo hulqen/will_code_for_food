@@ -1,5 +1,5 @@
 <% if @recipe.errors.present? %>
-  <p>Oops! 
+  <p>Oops!
   <% @recipe.errors.each do |key, error| %>
     <%= error %>
   <% end %>
@@ -7,15 +7,17 @@
 <% end %>
 
 <%= nested_form_for @recipe do |f| %>
+  <div class="hero-unit">
+    <%= f.label :name, "Namn" %>
+    <%= f.text_field :name %><br />
+    <%= f.label :cook_time, "Tillagningstid" %>
+    <%= f.text_field :cook_time %><br />
 
-  <%= f.label :name, "Namn" %>
-  <%= f.text_field :name %><br />
+    <%= f.label :servings, "Portioner" %>
+    <%= f.select(:servings, 1..24) %><br />
+  </div>
 
-  <%= f.label :cook_time, "Tillagningstid" %>
-  <%= f.text_field :cook_time %><br />
-
-  <%= f.label :servings, "Portioner" %>
-  <%= f.select(:servings, 1..24) %><br />
+  <div class="hero-unit">
   <h2>Ingredienser:</h2>
   <ol>
     <%= f.fields_for :ingredients do |i| %>
@@ -28,6 +30,9 @@
     <% end %>
     <%= f.link_to_add "Lägg till rad", :ingredients %>
   </ol>
+  </div>
+
+  <div class="hero-unit">
   <h2>Instruktioner: </h2>
   <ol>
     <%= f.fields_for :instructions do |i| %>
@@ -38,5 +43,6 @@
     <% end %>
     <%= f.link_to_add "Lägg till rad", :instructions %>
   </ol>
+  </div>
   <%= f.submit 'Spara recept' %>
 <% end %>

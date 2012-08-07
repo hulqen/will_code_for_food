@@ -1,11 +1,13 @@
 <h1>Receptsamlingar</h1>
-<% if @recipe_collections %>
-  <ul>
-    <% @recipe_collections.each do |rc| %>
-      <li><%= link_to rc.name, recipe_collection_path(rc) %></li>
-      <% end %>
-  </ul>
-  <%= link_to 'Skapa ny receptsamling', new_recipe_collection_path %>
-<% else %>
-  <p>Du har ingen receptsamling! <%= link_to 'Klicka här', new_recipe_collection_path %> för att skapa en </p>
-<% end %>
+<div>
+  <% if @recipe_collections %>
+    <ul class="unstyled">
+      <% @recipe_collections.each do |rc| %>
+        <li><%= link_to rc.name, recipe_collection_path(rc) %></li>
+        <% end %>
+    </ul>
+    <%= link_to 'Skapa ny receptsamling', new_recipe_collection_path %>
+  <% else %>
+    <p>Du har ingen receptsamling! <%= link_to 'Klicka här', new_recipe_collection_path %> för att skapa en </p>
+  <% end %>
+</div>
