@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.17'
 gem 'simple_form'
 gem 'sqlite3'
 gem 'jquery-rails'
